@@ -1,4 +1,4 @@
-baseURL = "http://blog.hugoexample.com/"
-languageCode = "en-us"
-title = "Hugo Example Blog"
+baseURL = "http://zyfdegh.zyfdegh.io/"
+languageCode = "zh-cn"
+title = "RedMothball Blog"
 canonifyURLs = true
