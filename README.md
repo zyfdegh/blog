@@ -1,6 +1,10 @@
 # blog
 Writing blogs with vim and markdown, publish with git, docker and hugo.
 
+# Deployment
+
+See [dockerfile-blog](https://github.com/zyfdegh/dockerfile-blog)
+
 Hugo Example Blog
 =================
 
