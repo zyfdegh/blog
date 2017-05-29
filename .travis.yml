@@ -1,4 +1,9 @@
+sudo: false
+
 language: go
+
+git:
+  depth: 1
 
 install: go get -v github.com/spf13/hugo
 
@@ -13,7 +18,7 @@ deploy:
   on:
     branch: master
   local_dir: public
-  repo: zyfegh/zyfdegh.github.io
+  repo: zyfdegh/zyfdegh.github.io
   target_branch: master
   email: deploy@travis-ci.org
   name: deployment-bot
