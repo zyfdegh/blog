@@ -5,7 +5,7 @@ title = "Evernote 笔记整理 - Linux 中安全设置"
 
 
 # 禁止密码登录
-**禁用前先添加公钥**
+** 禁用前先添加公钥 **
 
 ```sh
 vi /etc/ssh/sshd_config
@@ -17,7 +17,7 @@ PubkeyAuthentication yes  # 允许使用基于密钥认证的方式登陆
 systemctl restart sshd
 ```
 
-# 禁止ping
+# 禁止 ping
 echo 1 > /proc/sys/net/ipv4/icmp_echo_ignore_all
 
 恢复

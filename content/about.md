@@ -12,7 +12,7 @@ tags:
 
 |Key|Value|
 |:--|:--|
-|Penname|博子腾|
+|Penname | 博子腾 |
 |Location|Nanjing, China|
 |Skills|Golang, Docker, Linux etc.|
 |GitHub|[https://github.com/zyfdegh](https://github.com/zyfdegh)|

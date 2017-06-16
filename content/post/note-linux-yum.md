@@ -7,7 +7,7 @@ title = "Evernote 笔记整理 - CentOS 中 yum 的使用"
 yum -y install package_name
 
 # 更改源
-修改/etc/yum.repos.d/ 下面的CentOS-Base.repo
+修改 / etc/yum.repos.d/ 下面的 CentOS-Base.repo
 
 ## 更改 CentOS 源为 163 的
 
@@ -18,11 +18,11 @@ cd /etc/yum.repos.d
 # 备份默认源
 mv ./CentOS-Base.repo ./CentOS-Base.repo.bak
 
-# 使用wget下载 163 的源
+# 使用 wget 下载 163 的源
 # http://mirrors.163.com/.help/centos.html
 wget http://mirrors.163.com/.help/CentOS6-Base-163.repo
 
-# 把下载下来的文件CentOS-Base-163.repo设置为默认源
+# 把下载下来的文件 CentOS-Base-163.repo 设置为默认源
 mv CentOS6-Base-163.repo CentOS-Base.repo
 
 # 运行 yum makecache 生成缓存
@@ -60,9 +60,9 @@ yum provides jq
 # 安装一个 rpm 文件及其依赖
 yum install *.rpm
 
-# 删除多余kernels
+# 删除多余 kernels
 yum install yum-utils
 
-只保留3个较新的
+只保留 3 个较新的
 
 package-cleanup --oldkernels --count=3

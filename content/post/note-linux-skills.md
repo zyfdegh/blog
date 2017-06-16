@@ -5,7 +5,7 @@ title = "Evernote 笔记整理 - Linux 中一些小技巧与细节优化"
 
 # 一些小技巧
 
-## vi 显示/取消行号
+## vi 显示 / 取消行号
 :set nu
 
 :set nonu
@@ -38,11 +38,11 @@ du -sh folder | sort -nr
 ## 命令历史设置
 
 ### 添加时间、用户名
-echo 'export HISTTIMEFORMAT="%F %T `whoami` "' >> /etc/profile
+echo 'export HISTTIMEFORMAT="%F %T `whoami` "'>> /etc/profile
 source /etc/profile
 
 ### 设置记录最大条数
-编辑/etc/profile 设置HISTSIZE值为10000
+编辑 / etc/profile 设置 HISTSIZE 值为 10000
 
 ## top 使用
 top -p 1234 查看某个进程
@@ -79,17 +79,17 @@ python -m SimpleHTTPServer 80
 
 ## 输出格式化的 JSON
 
-echo '{"foo": "lorem", "bar": "ipsum"}' | python -m json.tool
+echo '{"foo":"lorem","bar":"ipsum"}' | python -m json.tool
 
 或者
 
 yum install -y yajl
 
-echo '{"foo": "lorem", "bar": "ipsum"}' | json_reformat
+echo '{"foo":"lorem","bar":"ipsum"}' | json_reformat
 
 或者
 
-echo '{"foo": "lorem", "bar": "ipsum"}' | jq
+echo '{"foo":"lorem","bar":"ipsum"}' | jq
 
 
 # 一些小工具
