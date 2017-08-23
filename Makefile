@@ -1,4 +1,4 @@
-VER=0.21
+VER=0.26
 
 default: help
 
@@ -13,8 +13,8 @@ help:
 
 install-hugo:
 	curl -sSL -o /tmp/hugo.tar.gz \
-		https://github.com/spf13/hugo/releases/download/v${VER}/hugo_${VER}_Linux-64bit.tar.gz
-	tar -xzf /tmp/hugo.tar.gz -C /usr/local/bin/
+		https://github.com/gohugoio/hugo/releases/download/v${VER}/hugo_${VER}_Linux-64bit.tar.gz
+	tar --overwrite -xzf /tmp/hugo.tar.gz -C /usr/local/bin/
 	rm /tmp/hugo.tar.gz
 
 sync:
