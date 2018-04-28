@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.org/zyfdegh/blog.svg?branch=master)](https://travis-ci.org/zyfdegh/blog)
+
 # blog
 Writing blogs with vim and markdown, publish with git, docker and hugo.
 
