@@ -3,13 +3,13 @@ VER=0.40.1
 default: help
 
 help:
-	@echo -e "Select a sub command \n"
-	@echo -e "install-hugo: \n\t Download and install hugo"
-	@echo -e "sync: \n\t Pull submodules"
-	@echo -e "view: \n\t Serve site in local"
-	@echo -e "publish: \n\t Generate website"
-	@echo -e "\n"
-	@echo -e "See README.md for more."
+	@echo "Select a sub command \n"
+	@echo "install-hugo: \n\t Download and install hugo"
+	@echo "sync: \n\t Pull submodules"
+	@echo "view: \n\t Serve site in local"
+	@echo "publish: \n\t Generate website"
+	@echo "\n"
+	@echo "See README.md for more."
 
 install-hugo:
 	curl -sSL -o /tmp/hugo.tar.gz \
