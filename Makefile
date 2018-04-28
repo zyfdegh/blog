@@ -1,4 +1,4 @@
-VER=0.26
+VER=0.40.1
 
 default: help
 
