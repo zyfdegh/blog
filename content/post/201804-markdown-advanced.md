@@ -81,10 +81,10 @@ chips away.
 [^countries]: 不包括中国、俄国。
 ```
 
-# 公式
-LaTeX 学习 [《A Beginner’s Guide to LATEX》][latex-pdf]
-行内公式，用一对 $ 隔开，如果 $E=mc^2$
+# LaTeX 公式
+LaTeX 行内公式，用一对 `$` 隔开，如 $E=mc^2$。
 
+了解更多 LaTeX 语法，可看我的另一篇文章[《LaTeX 公式极简笔记》](https://zyfdegh.github.io/post/201805-latex-tutorial/)。
 
 # 绘制图形
 当前 GitHub Pages 主题未支持，请参考 [Draw Diagrams With Markdown
