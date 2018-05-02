@@ -15,8 +15,6 @@ title = "LaTeX 公式极简笔记"
 在学术界比较流行，尤其是数学、物理学和计算机科学界。通过一些拓展（宏包），还能制作乐谱、棋谱、
 化学式、电路图等[^wiki1]。
 
-[^wiki1]: 维基百科 - LaTeX 趣味应用 https://zh.wikipedia.org/wiki/LaTeX
-
 # 为什么还要用 LaTeX
 写论文、期刊容易通过纯文本看到格式啦，如果用 Microsoft Word + MathType 的确能写，但比较相像
 的格式时不易分辨，还会受版本影响。对咯，LaTeX 更美观，还易于版本控制。
@@ -136,6 +134,8 @@ $$\psi(x)=\sqrt{\frac{1}{2^n n!}}\cdot
 <center>
 <img src="detexify.png" width=480 />
 </center>
+
+[^wiki1]: 维基百科 - LaTeX 趣味应用 https://zh.wikipedia.org/wiki/LaTeX
 
 [texpad]: https://www.texpad.com/osx
 [mactex]: http://www.tug.org/mactex/
