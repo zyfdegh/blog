@@ -11,7 +11,7 @@ buildFuture = false
 buildExpired = false
 
 languageCode = "en-us"
-title = "RedMothball Blog"
+title = "独行的蚂蚁 - 博客"
 
 # enable this to make all relative URLs relative to content root. Note that this does not affect absolute URLs.
 canonifyURLs = true

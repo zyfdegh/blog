@@ -633,7 +633,7 @@ deploy:
 # 参考文档
 [Continuous Deployment: Hugo + Travis CI → GitHub Pages][ref-1]
 
-<div style="text-align: right"> 2017.05 博子腾 于公寓 </div>
+<div style="text-align: right"> 2017.05 独行的蚂蚁 </div>
 
 [gh-pages]: https://pages.github.com/
 [go]: https://golang.org/
