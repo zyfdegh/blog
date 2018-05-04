@@ -3,6 +3,8 @@ date = "2018-05-03"
 title = "符号的英文单词与发音"
 +++
 
+（本文在移动设备上显示效果可能不佳）
+
 英文符号听得较多，不过容易混淆。有些还不会读写。所以整理了一下，这样方便以后相互交流。音标只标注不常见的单词。
 
 |符号|中文（数学）|英文（数学）|发音|
@@ -41,10 +43,12 @@ title = "符号的英文单词与发音"
 |?|问号|question mark|-|
 |''|一对单引号|a pair of single quotes|-|
 |""|一对双引号|a pair of double quotes|-|
-|()|一对圆括号（小括号）|a pair of parentheses|/pəˈrenθəsiːz/|
-|[]|一对圆括号|a pair of brackets|/ˈbrækɪts/|
-|{}|一对花括号（大括号）|a pair of braces|/ˈbreɪsɪz/|
+|()|一对圆括号|a pair of parentheses|/pəˈrenθəsiːz/|
+|[]|一对方括号|a pair of brackets|/ˈbrækɪts/|
+|{}|一对花括号|a pair of braces|/ˈbreɪsɪz/|
 |\<\>|尖括号|angle brackets|/ˈæŋ.ɡəl ˈbrækɪts/|
+
+圆括号又叫小括号，花括号又叫大括号。
 
 **参考文档**
 

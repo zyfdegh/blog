@@ -4,6 +4,7 @@ date = "2017-05-17T16:10:32+08:00"
 description = "我用 Vim 写 Markdown，Hugo 生成静态内容，Chrome 预览，用 Git 进行版本控制并存储博问和配置到 GitHub，用 Travis CI 构建并发布博文到 GitHub Pages。"
 +++
 
+（本文在移动设备上显示效果可能不佳）
 
 <center>
 <img src="hugo-ci-page.png" width=480 />
