@@ -272,8 +272,8 @@ Hugo Server 可以在你一边写 Markdown 时，一边监视文件改动，在�
 文件 `config.toml` 中，设置如下：
 
 ```toml
-baseurl = "https://fanach.github.io/"
-title = "Fanach Blog"
+baseurl = "https://zyfdegh.github.io/"
+title = "My Blog"
 ```
 
 ## 添加导航栏分类
@@ -446,7 +446,7 @@ GitHub Pages 静态内容放在 GitHub 的 Repo 中。
 > 当然，如果 Repo 名字和域名不一样，也是可以的。但需要一些额外的配置。
 见 [Configuring a publishing source for GitHub Pages][pages-guide]。
 
-> 如果将生成的静态内容，放到 `blog` 的 `gh-pages` 也是可以的。但这里为了分离，还是
+> 如果将生成的静态内容，放到 `blog` 的 `gh-pages` 分支也是可以的。但这里为了分离，还是
 将静态内容单独存放。
 
 一些 HTML、CSS 与资源文件引用的路径需要是绝对路径，也就是说，引用路径需要带上域名。
@@ -542,8 +542,6 @@ Settings -> Personal access tokens -> Generate new token，输入密码。
 图 13. 启用 Repo
 </center>
 
-> 这里截图用的是 zyfdegh/blog 作为示例，而不是 fanach/blog，因为后者已经配置过。
-
 ### 设置 Job
 点击齿轮图标，进入设置页面。勾选 “Build only if .travis.yml is present”。
 
@@ -589,7 +587,7 @@ deploy:
   on:
     branch: master
   local_dir: public
-  repo: fanach/fanach.github.io
+  repo: zyfdegh/zyfdegh.github.io
   target_branch: master
   email: deploy@travis-ci.org
   name: deployment-bot
@@ -602,7 +600,7 @@ deploy:
 3. 克隆当前 Repo 并进入目录；
 4. 执行 hugo 命令（将生成静态内容到 public/ 下）；
 5. 部署内容到 GitHub Pages。对 public/ 目录下所有内容提交到
- github.com/fanach/fanach.github.io 的 master 分支上。使用 Token 访问，并用帐号
+ github.com/zyfdegh/zyfdegh.github.io 的 master 分支上。使用 Token 访问，并用帐号
  deployment-bot。
 
 添加文件 `.travis.yml` 并 push 到 `blog` 中，接着将会进行一次构建。
@@ -627,7 +625,7 @@ deploy:
 
 ## FAQ
 ### 如果我有自己的域名，并想重定向到 GitHub Pages，可以嘛？
-** 答：** 似乎不行，我试过 CNAME 重定向，结果 GitHub Pages 是工作了。但自己的域名显示不了。
+**答**： 似乎不行，我试过 CNAME 重定向，结果 GitHub Pages 是工作了。但自己的域名显示不了。
 可以试一试，改掉 baseURL 为自己的域名，然后重新生成、提交一次。但这样就
 牺牲 GitHub Pages 了。
 
@@ -640,7 +638,7 @@ deploy:
 [go]: https://golang.org/
 [hugo]: https://gohugo.io
 [get-hugo]: https://github.com/spf13/hugo/releases
-[blog-src]: https://github.com/fanach/blog
+[blog-src]: https://github.com/zyfdegh/blog
 [hugo-conf]: http://gohugo.io/overview/configuration/
 [hugo-theme]: http://themes.gohugo.io/
 [theme-lith]: http://themes.gohugo.io/hugo-lithium-theme/
