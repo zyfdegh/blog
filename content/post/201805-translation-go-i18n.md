@@ -10,7 +10,7 @@ title = "[译] 手把手教你 Go 程序的国际化和本土化"
 其中的希腊文，替换成了简体中文。
 
 <center>
-<img src="title-gopher.png" width=720 />
+<img src="title-gopher.png" width=100% />
 </center>
 
 # 概述
@@ -868,11 +868,11 @@ $ go run main.go
 ```
 
 <center>
-<img src="request-1.png" width=480 />
+<img src="request-1.png" width=80% />
 </center>
 
 <center>
-<img src="request-2.png" width=480 />
+<img src="request-2.png" width=80% />
 </center>
 
 从现在起，世界如你所愿... 😎

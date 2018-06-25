@@ -7,7 +7,7 @@ title = "💡想法：鱼形机器人 - 吞食海洋垃圾"
 来源：界面新闻 -[《触目惊心！美国附近的太平洋垃圾岛已有三个法国那么大》][news]
 
 <center>
-<img src="sea-rubbish.jpg" width=640 />
+<img src="sea-rubbish.jpg" width=90% />
 </center>
 
 后来在想，是不是能有一种持续的、不需要人工捕捞的方式，来一点一点清理这些垃圾。
