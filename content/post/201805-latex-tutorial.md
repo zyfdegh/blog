@@ -128,7 +128,7 @@ $$\psi(x)=\sqrt{\frac{1}{2^n n!}}\cdot
 数学符号可查这个文档 [LaTeX Mathematical Symbols][latex-symbols].
 
 <center>
-<img src="latex-symbols.png" width=480 />
+<img src="latex-symbols.png" width=80% />
 </center>
 
 文档挺全的，怎么快速查？
@@ -136,7 +136,7 @@ $$\psi(x)=\sqrt{\frac{1}{2^n n!}}\cdot
 还有个叫 [Detexify][detexify] 的网站，能识别手写的符号，然后得到对应的名称。🧐
 
 <center>
-<img src="detexify.png" width=480 />
+<img src="detexify.png" width=80% />
 </center>
 
 [^wiki1]: 维基百科 - LaTeX 趣味应用 https://zh.wikipedia.org/wiki/LaTeX
