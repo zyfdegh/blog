@@ -104,5 +104,7 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 不限量 | 吃到饱 | Unlimited |
 | 米 | 公尺 | Meter |
 | 礼物 | 伴手礼 | Souvenir, present, gift |
+| 暴雨 | 豪雨 | Heavy rain, rainstorm |
 
 # 库
+（准备做一个简繁转换的库，相对依靠单个汉字转换的库，转换后的语句会通顺一些）
