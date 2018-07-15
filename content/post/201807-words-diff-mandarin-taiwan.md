@@ -48,7 +48,6 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 内存 | 记忆体 | Memory, RAM |
 | 项目 | 专案 | Project |
 | 硅谷 | 矽谷 | Silicon Valley |
-|------------------------------|
 | 白葡萄酒 | 白酒 | White wine |
 | 白酒 | 高粱酒 | Spirit, liquor |
 | 喜力 | 海尼根 | Heineken |
@@ -62,34 +61,28 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 乌贼、墨鱼 | 花枝 | Squid |
 | 金枪鱼 | 鲔（wěi）鱼 | Tuna |
 | 巧克力 | 朱古力 | Chocolate |
-|------------------------------|
 | 幼儿园 | 幼稚园 | Kindergarten |
 | 小学 | 国小 | Primary school |
 | 初中 | 国中 | Junior high, middle school |
 | 高考 | 联考 | College entrance examination |
-|------------------------------|
 | 公交车 | 公车 | Bus |
 | 地铁 | 捷运 | Subway, metro |
 | 摩托车 | 机车 | Motorbike |
 | 自行车 | 脚踏车 | Bike, bicycle |
 | 出租车 | 计程车 | Taxi |
-|------------------------------|
 | 朝鲜 | 北韩 | North Korea |
 | 新西兰 | 纽西兰 | New Zealand |
 | 沙特阿拉伯 | 沙乌地阿拉伯 | Saudi Arabia |
 | 法（fǎ）国 | 法（fà）国 | Franch |
 | 马尔代夫 | 马尔蒂夫 | Maldives |
-|------------------------------|
 | 奥巴马 | 欧巴马 | Obama |
 | 普京 | 普廷、普丁 | Putin |
 | 希拉里 | 希拉蕊 | Hillary |
 | 乔布斯 | 贾伯斯 | Jobs |
 | 梵高 | 梵谷 | Van Gogh |
 | 莫奈 | 莫内 | Monnai |
-|------------------------------|
 | 美女 | 正妹 | Beauty |
 | 同事 | 同仁 | Colleague, co-worker |
-|------------------------------|
 | 百分之十 | 十啪 | 10%, ten percent |
 | 垃圾 | 乐色 | Garbage, rubbish, junk |
 | 不客气 | 不会 | You're welcome |
