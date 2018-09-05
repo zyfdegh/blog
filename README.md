@@ -19,6 +19,8 @@ $ cd blog
 
 $ make install-hugo
 
+$ make submodule
+
 $ make view
 ```
 

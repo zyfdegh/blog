@@ -5,7 +5,7 @@ default: help
 help:
 	@echo "Select a sub command \n"
 	@echo "install-hugo: \n\t Download and install hugo"
-	@echo "sync: \n\t Pull submodules"
+	@echo "submodule: \n\t Pull submodules"
 	@echo "view: \n\t Serve site in local"
 	@echo "publish: \n\t Generate website"
 	@echo "\n"
@@ -17,7 +17,7 @@ install-hugo:
 	tar --overwrite -xzf /tmp/hugo.tar.gz -C /usr/local/bin/
 	rm /tmp/hugo.tar.gz
 
-sync:
+submodule:
 	git submodule update --init --recursive
 
 view:
