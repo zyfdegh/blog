@@ -12,12 +12,10 @@ Writing articles with Markdown in Vim, publish with a simple git push!
 
 ## View in local
 
+First, install hugo https://gohugo.io/getting-started/installing/
+
 ```sh
-$ git clone https://github.com/zyfdegh/blog
-
-$ cd blog
-
-$ make install-hugo
+$ git clone https://github.com/zyfdegh/blog && cd blog
 
 $ make submodule
 
