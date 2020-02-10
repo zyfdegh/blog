@@ -6,15 +6,7 @@ description = "Example to show how to cross compile a Go program for MIPS"
 
 I've got a Lenovo router last year, and I've been always using it as a room AP to
  make the WiFi better. Recently, it's getting harder to bypass the Great Firewall
- in China so I have an idea to use the router as VPN client.
-
-The router is *newifi mini Y1* and labeled *Model R6830* on the backside. It has 
-only 16M ROM along with 128MB of memory, but it's enough to install and run 
-OpenWRT. I searched the device on [openwrt.org](https://openwrt.org/toh/start) and 
-luckily it's fully supported. So I followed the [instruction page](`https://openwrt.org/toh/lenovo/lenovo_y1_v1`) and get the router flashed! 
-
-If you're insterested on how to flash it, just leave a comment below and
- I'll write another post on how to install and configure OpenWRT.
+so I flashed the router to OpenWRT and try to use it as a VPN client.
 
 After everything is done, the router now is a mini Linux server and I can ssh into it.
 Here are some infomation of the device.
@@ -194,3 +186,10 @@ GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmess
 ```
 
 [needs solution & update]
+
+The router above is *newifi mini Y1* and labeled *Model R6830* on the backside.
+It has 16M ROM along with 128MB of memory, and it's Okay to install and run
+OpenWRT. I searched the device on [openwrt.org](https://openwrt.org/toh/start) and
+luckily it's fully supported. So I followed the [instruction page](`https://openwrt.org/toh/lenovo/lenovo_y1_v1`) and get the router flashed!
+If you're insterested on how to flash it, just leave a comment below and I'll
+write another post on how to install and configure OpenWRT.
