@@ -48,14 +48,19 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 内存 | 记忆体 | Memory, RAM |
 | 项目 | 专案 | Project |
 | 硅谷 | 矽谷 | Silicon Valley |
+| 刷屏 | 洗版 | Spam |
+| 自定义 | 客制化 | custom, user-defined|
+| 下划线 | 底线 | underline |
 | 白葡萄酒 | 白酒 | White wine |
 | 白酒 | 高粱酒 | Spirit, liquor |
 | 喜力 | 海尼根 | Heineken |
 | 三文鱼 | 鲑鱼 | Salmon |
 | 芝士 | 起司 | Cheese |
+| 薯片 | 洋芋片 | Crisps |
 | 酸奶 | 优格、优酪乳 | Yogurt |
 | 花生 | 土豆 | Peanut |
 | 传统风味 | 古早味 | Traditional flavored |
+| 堂食 | 内用 | Dine in |
 | 盒饭 | 便当 | Fast food, Bento (日: 弁当)|
 | 粉丝 | 冬粉 | Silk noodles |
 | 乌贼、墨鱼 | 花枝 | Squid |
@@ -70,6 +75,8 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 摩托车 | 机车 | Motorbike |
 | 自行车 | 脚踏车 | Bike, bicycle |
 | 出租车 | 计程车 | Taxi |
+| 奔驰（汽车品牌） | 缤士 | Benz |
+| 大众（汽车品牌） | 福斯 | VW |
 | 朝鲜 | 北韩 | North Korea |
 | 新西兰 | 纽西兰 | New Zealand |
 | 沙特阿拉伯 | 沙乌地阿拉伯 | Saudi Arabia |
@@ -79,14 +86,17 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 普京 | 普廷、普丁 | Putin |
 | 希拉里 | 希拉蕊 | Hillary |
 | 乔布斯 | 贾伯斯 | Jobs |
+| 斯大林 | 史达林 | Stalin |
 | 梵高 | 梵谷 | Van Gogh |
 | 莫奈 | 莫内 | Monnai |
 | 美女 | 正妹 | Beauty |
 | 同事 | 同仁 | Colleague, co-worker |
-| 百分之十 | 十啪 | 10%, ten percent |
+| 百分之十 | 十帕 | 10%, ten percent |
 | 垃圾 | 乐色 | Garbage, rubbish, junk |
 | 不客气 | 不会 | You're welcome |
 | 导弹 | 飞弹 | Missile |
+| 水泥 | 石屎 | Concrete |
+| UFO | 幽浮 | UFO |
 | 激光 | 镭射 | Laser |
 | 新闻 | 资讯 | News |
 | 通过 | 透过 | Through |
@@ -95,10 +105,16 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 世界杯 | 世界盃 | World Cup |
 | 博客 | 部落格 | Blog |
 | 不限量 | 吃到饱 | Unlimited |
-| 米 | 公尺 | Meter |
+| 米（长度） | 公尺 | Meter |
 | 礼物 | 伴手礼 | Souvenir, present, gift |
 | 暴雨 | 豪雨 | Heavy rain, rainstorm |
 | 车费 | 车资 | Fare |
+| 圣诞 | 耶诞 | Christmas |
+| 芥末 | 山葵, washabi（日语） | mustard, washabi |
+| 地道 | 道地 | native |
+| 堵车 | 塞车 | traffic jam |
+| 熊猫 | 猫熊 | panda |
+
 
 # 库
 （准备做一个简繁转换的库，相对依靠单个汉字转换的库，转换后的语句会通顺一些）
