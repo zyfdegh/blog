@@ -6,9 +6,11 @@ description = "Example to show how to cross compile a Go program for MIPS"
 
 I've got a Lenovo router last year, and I've been always using it as a room AP to
  make the WiFi better. Recently, it's getting harder to bypass the Great Firewall
-so I flashed the router to OpenWRT and try to use it as a VPN client.
+so I flashed the router to OpenWrt and try to make it as a VPN client.
 
-After everything is done, the router now is a mini Linux server and I can ssh into it.
+## Device Info
+
+After everything is done, the router now is a mini Linux server and I can SSH onto it.
 Here are some infomation of the device.
 
 ```sh
@@ -44,13 +46,15 @@ overlayfs:/overlay       12.0M      1.5M     10.6M  12% /
 tmpfs                   512.0K         0    512.0K   0% /dev
 ```
 
-The CPU architect is MIPS and it's new for me. Next step I want to install ***v2ray***
- on it, a proxy client. But I found the [official](https://github.com/v2ray/v2ray-core/releases)
+It has a MIPS architected CPU *MIPS 24KEc V5.0* and that's new for me. Next step
+ I want to install ***v2ray*** on it, a proxy client. But I found the [official](https://github.com/v2ray/v2ray-core/releases)
  released package is too big for my device. It takes about 20MB of a zipped binary.
 The *opkg* package manager doesn't provide v2ray either.
 
-So, it's time to do myself. I cloned the source code of v2ray on my macOS and try to
-cross-compile it.
+## Build A Smaller v2ray
+
+So, it's time to do myself. I cloned the source code of [v2ray](https://github.com/v2ray/v2ray-core) 
+on my macOS, it's written in Go and must be easy to cross-compile.
 
 ```sh
 macbook:$ mkdir -p $GOPATH/src/v2ray.com/core
@@ -61,7 +65,7 @@ macbook:$ cd $GOPATH/src/v2ray.com/core/main
 (For go1.12+ with go mod, you can clone it to anywhere.)
 
 According to the GoMips [wiki](https://github.com/golang/go/wiki/GoMips), I ran the
-following command
+following command to compile.
 ```sh
 macbook:$ GOOS=linux GOARCH=mips GOMIPS=softfloat go build -o v2ray
 ```
@@ -74,7 +78,7 @@ macbook:$ file v2ray
 v2ray: ELF 32-bit MSB executable, MIPS, MIPS32 version 1 (SYSV), statically linked, stripped
 ```
 
-It's 21M and I guess this is the official build way. To make the output smaller, 
+It's 21M and I guess this is the official way of building. To make the output smaller, 
 I retry the build command with some parameters. (Although the router supports 
 external USB stick, I don't have spare one and it's unnecessary.)
 
@@ -85,7 +89,8 @@ macbook:$ ls -alh v2ray
 ```
 
 It's smaller now as 15M, but still can't fit my device since the router
- has only 10.6M left. Then I found a tool named *upx*, which can compress a ELF file.
+ has only 10.6M left. Then I found a tool named *[upx](https://upx.github.io/)*, 
+ which can compress a ELF file.
 
 ```sh
 macbook:$ upx -9 v2ray
@@ -118,10 +123,12 @@ openwrt:$ ./v2ray
 openwrt:$ ./v2ray: line 2: syntax error: unterminated quoted string
 ```
 
-Anything wrong? Do the *upx* make it corrupt? Or is the build parameter wrong?
-I checked the build steps and it's hard to figure that out.
+Anything wrong? Do the *upx* make it corrupted? Or any of the build parameter wrong?
+I checked the build steps and try to figure that out what's going on.
 
-Then I tried a hello-world program without any build parameter and *upx*, it also failed.
+## Try With A Helloworld Program
+
+Then I tried a hello-world program without any build parameter and no upx, it also failed.
 
 ```go
 package main
@@ -144,7 +151,7 @@ openwrt:/tmp# ./hello
 ./hello: line 1: syntax error: unexpected "("
 ```
 
-And here is my go info.
+I started googling the problem, and here is my go info.
 
 ```sh
 macbook:$ go version
@@ -185,11 +192,74 @@ PKG_CONFIG="pkg-config"
 GOGCCFLAGS="-fPIC -m64 -pthread -fno-caret-diagnostics -Qunused-arguments -fmessage-length=0 -fdebug-prefix-map=/var/folders/zs/fbr4t1hd1p52lw7vfz084rcm0000gn/T/go-build718094728=/tmp/go-build -gno-record-gcc-switches -fno-common"
 ```
 
-[needs solution & update]
+## The Solution
+I even looked through the offical [MIPS32® 24KE™ Core spec](https://www.mips.com/downloads/the-mips32-24ke-core-family-high-performance-risc-cores-with-dsp-enhancements/)
+and it's strange there's no indication of Big-Endian or Little-Endian.
+
+At last I solved the problem by setting **GOARCH=mipsle**, it works now.
+
+```sh
+macbook:$ GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -o hello
+macbook:$ scp hello root@192.168.99.1:/tmp
+
+openwrt:/tmp# ./hello
+hello, mips
+```
+
+The v2ray binary also works now, 
+```sh
+macbook:$ GOOS=linux GOARCH=mipsle GOMIPS=softfloat go build -trimpath -ldflags="-s -w" -o v2ray
+macbook:$ scp v2ray root@192.168.99.1:/tmp
+
+openwrt:/tmp# ./v2ray --help
+Usage of ./v2ray:
+  -config string
+    	Config file for V2Ray.
+  -format string
+    	Format of input file. (default "json")
+  -test
+    	Test config file only, without launching V2Ray server.
+  -version
+    	Show current version of V2Ray.
+```
+
+But the upx compressed one hang on command line, let's skip this.
+```sh
+root@OpenWrt:/tmp# ./v2ray --help
+<hang, nothing prints>
+```
+
+## Conslusion
+
+If you also have trouble building programs for a different operating system
+and architecture, remember the first step is to determine the exact target 
+device information. Some tools may be helpful.
+
+```sh
+# check big-endian/little-endian
+$ lscpu | grep "Byte Order"
+
+# check go supported OS/Arch
+$ go tool dist list | grep mips
+linux/mips
+linux/mips64
+linux/mips64le
+linux/mipsle
+```
 
 The router above is *newifi mini Y1* and labeled *Model R6830* on the backside.
 It has 16M ROM along with 128MB of memory, and it's Okay to install and run
-OpenWRT. I searched the device on [openwrt.org](https://openwrt.org/toh/start) and
-luckily it's fully supported. So I followed the [instruction page](`https://openwrt.org/toh/lenovo/lenovo_y1_v1`) and get the router flashed!
-If you're insterested on how to flash it, just leave a comment below and I'll
-write another post on how to install and configure OpenWRT.
+OpenWrt. I searched the device on [openwrt.org](https://openwrt.org/toh/start) and
+luckily it's fully supported. So I followed the [instruction page](`https://openwrt.org/toh/lenovo/lenovo_y1_v1`) 
+and get the router flashed!
+If you're insterested on how to flash the router, just leave a comment below and 
+I may write another post on how to install and configure OpenWrt.
+
+
+**References**
+
+\[1\] StackOverflow: Writing and Compiling Program For OpenWrt.
+https://stackoverflow.com/questions/55878437/writing-and-compiling-program-for-openwrt/60161561#60161561
+
+\[2\] Wikipedia: Endianness
+https://en.wikipedia.org/wiki/Endianness
