@@ -95,6 +95,7 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 垃圾 | 樂色 | Garbage, rubbish, junk |
 | 不客气 | 不會 | You're welcome |
 | 导弹 | 飛彈 | Missile |
+| 坦克 | 戰車 | Tanks |
 | 水泥 | 石屎 | Concrete |
 | UFO | 幽浮 | UFO |
 | 激光 | 鐳射 | Laser |
@@ -114,6 +115,7 @@ title = "感受下汉语的分化：大陆和台湾词语差异对照表"
 | 地道 | 道地 | Native |
 | 堵车 | 塞車 |Traffic jam |
 | 熊猫 | 貓熊 |Panda |
+| 识别 | 辨識 | Recognize |
 
 
 # 库
