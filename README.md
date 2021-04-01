@@ -24,5 +24,8 @@ $ make view
 
 Open http://0.0.0.0:1313/ in broswer and that's the site.
 
+## Theme
+Lithium https://themes.gohugo.io/hugo-lithium-theme/
+
 ## Related
 dockerfile-blog: https://github.com/zyfdegh/dockerfile-blog
