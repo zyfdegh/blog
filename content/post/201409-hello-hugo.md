@@ -2,6 +2,7 @@
 title: "Hello Hugo!"
 description: "Saying 'Hello' from Hugo"
 date: "2014-09-01"
+draft: true
 categories:
   - "example"
   - "hello"
