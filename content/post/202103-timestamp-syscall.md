@@ -4,7 +4,7 @@ date = "2020-05-31"
 description = "想知道 Go 中执行 time.Now() 如何获得系统时间"
 +++
 
-简单发问
+先来发问
 --------------------------------------------------------------------------------
 
 来看这样一段代码
@@ -26,9 +26,10 @@ func main() {
 
 <!-- 演示：样例 /src-now，获取时间 -->
 
-那么运行时，究竟发生了什么？这其实并不简单。
+那么运行时，究竟发生了什么？这不是个简单的问题。
 
-本文档将一步一步，剖析 Go 源码中 Now() 函数的实现，再到如何封装汇编代码，进行系统调用时，调用了什么？
+本文档将一步一步，从 Go 源码中 Now() 函数开始剖析，到 Go 如何调用汇编，再到系统调用过程，
+解释编程语言如何与操作系统互动。
 
 Go 源码分析
 --------------------------------------------------------------------------------
@@ -59,7 +60,7 @@ Go 中对函数定义的说明，见 https://golang.org/ref/spec#Function_declar
 
 > 文档中用的 Go 版本为 1.15.2
 
-注释写了由 runtime 包提供，那到 runtime 包去找
+注释写了 now() 由 runtime 包提供，那到 runtime 包去找
 
 没找到 `func now()`，但有 `func time_now()`，是这个吗？
 
@@ -108,7 +109,7 @@ import _ "unsafe"
 func time_now() (sec int64, nsec int32, mono int64)
 ```
 
-`src/runtime/timeasm.go` 跟前一个文件 `src/runtime/timestub.go` 不同之处在于，顶部的 Build constraints 不一样
+跟前一个文件 `src/runtime/timestub.go` 不同之处在于，顶部的 Build constraints 不一样
 
 第一个
 ```go
@@ -120,7 +121,7 @@ func time_now() (sec int64, nsec int32, mono int64)
 // +build windows
 ```
 
-说明不同 OS 构建时，用了不同文件。更多 Build constraints 见 https://golang.org/cmd/go/#hdr-Build_constraints
+不同 OS 构建时，用了不同文件。更多 Build constraints 见 https://golang.org/cmd/go/#hdr-Build_constraints
 
 那先来看非 Windows 系统，也就是含 Linux 的，后者开源好查
 
@@ -161,11 +162,10 @@ func walltime() (sec int64, nsec int32) {
 
 调用了 `walltime1()`，再跳，由于当前机器是 macOS，跳到了 `src/runtime/sys_darwin.go` 中。
 
-实际在 runtime 目录检索 walltime1，有多个 `.go` 文件中声明了该函数，还有很多 `.s` 文件包含这个函数名。
+实际在 runtime 目录检索 walltime1，找到多个 `.go` 文件中声明了该函数，还有很多 `.s` 文件包含这个函数名。
 
 ```sh
 runtime$ grep -r 'walltime1' .
-
 ./sys_linux_mips64x.s:// func walltime1() (sec int64, nsec int32)
 ./sys_linux_mips64x.s:TEXT runtime·walltime1(SB),NOSPLIT,$16-12
 ./sys_openbsd_amd64.s:// func walltime1() (sec int64, nsec int32)
@@ -233,25 +233,11 @@ package runtime
 func walltime1() (sec int64, nsec int32)
 ```
 
-如上所说，这个没有 body 的函数，是在别的语言实现的。根据 Build constraints 知道，linux 是用的这个。
-
-再看一个，Darwin 的，看着是调用了 libc。
-
-src/runtime/sys_darwin.go
-```go
-//go:nosplit
-//go:cgo_unsafe_args
-func walltime1() (int64, int32) {
-	var t timeval
-	libcCall(unsafe.Pointer(funcPC(walltime_trampoline)), unsafe.Pointer(&t))
-	return int64(t.tv_sec), 1000 * t.tv_usec
-}
-func walltime_trampoline()
-```
+如上所说，这个没有 body 的函数，是在别的语言实现的。根据上面的 Build constraints，知道 linux 是用的这个。
 
 先铺垫下 Go 与汇编
 --------------------------------------------------------------------------------
-前方高能，需要有汇编基础，并了解 Go 如何调用汇编代码。
+继续分析之前，需要温习一下汇编基础，并了解 Go 如何调用汇编代码。
 
 <!-- 演示：样例 /src-var-asm，调用汇编 -->
 
@@ -336,7 +322,7 @@ fallback:
 
 看到这儿怕了，学汇编还是在校园，快十年。还是继续研究下，得弄清楚时间到底哪里来。
 
-根据这篇中文页面，[Go 汇编语言 - 函数基本语法](https://cloud.tencent.com/edu/learning/course-2412-38523)，现学现讲
+根据这本书籍，[Go 汇编语言 - 函数基本语法](https://cloud.tencent.com/edu/learning/course-2412-38523)，现学现讲
 
 先看第一句，是函数定义
 
@@ -346,7 +332,7 @@ fallback:
 TEXT runtime·walltime1(SB),NOSPLIT,$16-12
 ```
 
-- TEXT 用来定义函数标识，名称为 `runtime·walltime1`，中间用的中点（·）
+- TEXT 用来定义函数标识，名称为 `runtime·walltime1`，中间用的中点（·）连接包名与函数名
 
 - SB 是 Go 定义的伪寄存器，Static Base pointer，见 [Go 汇编中的伪寄存器](https://cloud.tencent.com/edu/learning/course-2412-38485)
 
@@ -449,7 +435,7 @@ fallback:
 	JMP ret
 ```
 
-用 Go 伪代码来写的话（师爷，你给翻译翻译，什么叫做汇编）
+用 Go 伪代码来写的话（师爷你给翻译翻译，什么叫做汇编）
 
 ```go
 func walltime1() (int64, int32) {
@@ -514,7 +500,7 @@ var (
 
 网上大佬说 `0x315ca59` 这个码是用来校验的，还不清楚怎么生成。
 
-恰好之前看过 Linux 系统调用文档 https://man7.org/linux/man-pages/man2/syscalls.2.html
+之前恰好查过 Linux 系统调用文档 https://man7.org/linux/man-pages/man2/syscalls.2.html
 
 `gettimeofday` 和 `clock_gettime` 都在里面，`clock_gettime` 调用出入参，文档在 https://man7.org/linux/man-pages/man2/clock_gettime.2.html
 
@@ -589,13 +575,25 @@ __SYSCALL(__NR_stat, sys_newstat)
 __SYSCALL(__NR_clock_gettime, sys_clock_gettime)
 ```
 
-说了这么多，怎么知道分析过程是正确的，能自己再写一次 Go 与汇编，实现系统调用吗？
+说了这么多，怎么知道这些分析过程是正确的，能自己再写一次 Go 与汇编，实现系统调用吗？
 
 <!-- 演示：自己进行系统调用 -->
 
 其他操作系统
 --------------------------------------------------------------------------------
-对于 Darwin amd64，系统调用是 `gettimeofday`，见 Apple Libc https://opensource.apple.com/source/Libc/
+对于 Darwin amd64，是通过 libc 进行系统调用 `gettimeofday`，见 Apple Libc https://opensource.apple.com/source/Libc/
+
+src/runtime/sys_darwin.go
+```go
+//go:nosplit
+//go:cgo_unsafe_args
+func walltime1() (int64, int32) {
+	var t timeval
+	libcCall(unsafe.Pointer(funcPC(walltime_trampoline)), unsafe.Pointer(&t))
+	return int64(t.tv_sec), 1000 * t.tv_usec
+}
+func walltime_trampoline()
+```
 
 src/runtime/sys_darwin_amd64.s
 ```s
