@@ -4,6 +4,8 @@ date = "2020-05-31"
 description = "想知道 Go 中执行 time.Now() 如何获得系统时间"
 +++
 
+想知道 Go 中执行 time.Now() 如何获得系统时间吗? 在调用时，发生了什么。这不是个简单的问题。
+
 先来发问
 --------------------------------------------------------------------------------
 
@@ -26,7 +28,7 @@ func main() {
 
 <!-- 演示：样例 /src-now，获取时间 -->
 
-那么运行时，究竟发生了什么？这不是个简单的问题。
+那么运行时，究竟发生了什么？
 
 本文档将一步一步，从 Go 源码中 Now() 函数开始剖析，到 Go 如何调用汇编，再到系统调用过程，
 解释编程语言如何与操作系统互动。
@@ -56,7 +58,8 @@ func now() (sec int64, nsec int32, mono int64)
 这个函数没有方法体，只提供函数名与签名，是由 Go 之外的语言实现的。
 Go 中对函数定义的说明，见 https://golang.org/ref/spec#Function_declarations
 
-> A function declaration may omit the body. Such a declaration provides the signature for a function implemented outside Go, such as an assembly routine.
+> A function declaration may omit the body. Such a declaration provides the signature 
+for a function implemented outside Go, such as an assembly routine.
 
 > 文档中用的 Go 版本为 1.15.2
 
@@ -84,12 +87,14 @@ func time_now() (sec int64, nsec int32, mono int64) {
 
 那怎么确定是这个 `func time_now()` 呢？
 
-看上面用了条特殊注释 `//go:linkname` ，称为 Compiler Directives，更多编译器指令见 https://golang.org/pkg/cmd/compile/
+看上面用了条特殊注释 `//go:linkname` ，称为 Compiler Directives，更多编译器指令见
+https://golang.org/pkg/cmd/compile/
 
 ```go
 //go:linkname localname [importpath.name]
 ```
-> the //go:linkname directive instructs the compiler to use “importpath.name” as the object file symbol name for the variable or function declared as “localname” in the source code.
+> the //go:linkname directive instructs the compiler to use “importpath.name” as the object file
+ symbol name for the variable or function declared as “localname” in the source code.
 
 
 好，现在知道 `time.now` 是 `time_now` 对象文件的符号名，也就是 `runtime.time_now` 返回了时间。
@@ -342,9 +347,11 @@ TEXT runtime·walltime1(SB),NOSPLIT,$16-12
 
 - 12 表示函数参数和返回值空间大小为 12 字节
 
-> (SB) 表示是函数名符号相对于 SB 伪寄存器的偏移量，二者组合在一起最终是绝对地址。作为全局的标识符的全局变量和全局函数的名字一般都是基于 SB 伪寄存器的相对地址。
+> (SB) 表示是函数名符号相对于 SB 伪寄存器的偏移量，二者组合在一起最终是绝对地址。
+作为全局的标识符的全局变量和全局函数的名字一般都是基于 SB 伪寄存器的相对地址。
 
-> NOSPLIT 主要用于指示叶子函数不进行栈分裂。如果有 NOSPLIT 标注，会禁止汇编器为汇编函数插入栈分裂的代码。NOSPLIT 对应 Go 语言中的 //go:nosplit 注释。
+> NOSPLIT 主要用于指示叶子函数不进行栈分裂。如果有 NOSPLIT 标注，会禁止汇编器为汇编函数插入栈分裂的代码。
+NOSPLIT 对应 Go 语言中的 //go:nosplit 注释。
 
 以上解释主要引用 《Go 语言高级编程》 https://cloud.tencent.com/edu/learning/course-2412-38523
 
@@ -388,7 +395,11 @@ TEXT runtime·walltime1(SB),NOSPLIT,$16-12
 
 - VDSO 是 virtual dynamic shared object，用于用户态调用内核态，能减少内核切换开销，见 https://en.wikipedia.org/wiki/VDSO
 
-> vDSO (virtual dynamic shared object) is a kernel mechanism for exporting a carefully selected set of kernel space routines to user space applications so that applications can call these kernel space routines in-process, without incurring the performance penalty of a mode switch from user mode to kernel mode that is inherent when calling these same kernel space routines by means of the system call interface.
+> vDSO (virtual dynamic shared object) is a kernel mechanism for exporting a carefully selected set
+ of kernel space routines to user space applications so that applications can call these 
+ kernel space routines in-process, without incurring the performance penalty of a mode switch from
+  user mode to kernel mode that is inherent when calling these same kernel space routines by means
+   of the system call interface.
 
 继续往下，来到重点逻辑
 ```s
@@ -502,7 +513,8 @@ var (
 
 之前恰好查过 Linux 系统调用文档 https://man7.org/linux/man-pages/man2/syscalls.2.html
 
-`gettimeofday` 和 `clock_gettime` 都在里面，`clock_gettime` 调用出入参，文档在 https://man7.org/linux/man-pages/man2/clock_gettime.2.html
+`gettimeofday` 和 `clock_gettime` 都在里面，`clock_gettime` 调用出入参，文档在
+https://man7.org/linux/man-pages/man2/clock_gettime.2.html
 
 ```cpp
     #include <time.h>
@@ -581,7 +593,8 @@ __SYSCALL(__NR_clock_gettime, sys_clock_gettime)
 
 其他操作系统
 --------------------------------------------------------------------------------
-对于 Darwin amd64，是通过 libc 进行系统调用 `gettimeofday`，见 Apple Libc https://opensource.apple.com/source/Libc/
+对于 Darwin amd64，是通过 libc 进行系统调用 `gettimeofday`，见 Apple Libc
+https://opensource.apple.com/source/Libc/
 
 src/runtime/sys_darwin.go
 ```go
@@ -675,55 +688,25 @@ func nowQPC() (sec int64, nsec int32, mono int64) {
 }
 ```
 
+总结
+----------------------
+Go 调用 time.Now() 时，会先根据不同操作系统、不同 CPU 架构，去查找不同的系统调用实现。对于 Linux amd64，
+会通过汇编直接调用 `vdso_clock_gettime`，如果没有这个系统调用，会降级调用 `vdso_gettimeofday`，不论调用哪一个，
+都会返回秒、纳秒数值。对于 Darwin amd64，会通过 libc 调用 `gettimeofday`，对于 Windows amd64，
+会调用 `GetSystemTimeAsFileTime`，其他系统与架构，也分别能找到对应实现。最后进行转换并返回。
+
+但我们还没明白几个问题。能解释清楚的大佬，欢迎留言联系我。
+1. 操作系统中，系统调用是如何实现的？`clock_gettime` 怎样根据调用的传参，进行怎样的处理并返回？
+2. 汇编进行系统调用时，将入参放入 DI 寄存器、最后到 SP 寄存器取结果，用哪个寄存器是在哪约定的？
+3. 操作系统中，时间是如何自增的？设置时间时，怎样把时间同步到 BIOS 芯片中？开机时，又是如何读取时间的？
+4. 石英钟计时的物理学原理是什么？
+
 --------------------------------------------------------------------------------
 下一期
 1. Linux 源码中 clock_gettime 的实现
 2. 如何实现一个简单的 Linux 系统调用？
 3. 硬件时间与计时原理
 --------------------------------------------------------------------------------
-
-查看 Linux 源码实现
---------------------------------------------------------------------------------
-Linux 最新代码，https://github.com/torvalds/linux，Commit 5e46d1b78a
-
-找到了 `clock_gettime` 的定义，是 `__vdso_clock_gettime` 的 alias
-
-arch/x86/entry/vdso/vclock_gettime.c
-```cpp
-int clock_gettime(clockid_t, struct old_timespec32 *)
-	__attribute__((weak, alias("__vdso_clock_gettime")));
-
-int clock_gettime64(clockid_t, struct __kernel_timespec *)
-	__attribute__((weak, alias("__vdso_clock_gettime64")));
-```
-
-arch/x86/um/vdso/um_vdso.c
-```cpp
-int __vdso_clock_gettime(clockid_t clock, struct __kernel_old_timespec *ts)
-{
-	long ret;
-
-	asm("syscall" : "=a" (ret) :
-		"0" (__NR_clock_gettime), "D" (clock), "S" (ts) : "memory");
-
-	return ret;
-}
-int clock_gettime(clockid_t, struct __kernel_old_timespec *)
-	__attribute__((weak, alias("__vdso_clock_gettime")));
-```
-
-如何编写一个 Linux 系统调用？
---------------------------------------------------------------------------------
-能改 Linux 源码，实现一个系统调用，叫 get_my_birthday()，返回我的出生年月时间戳？
-```cpp
-
-```
-
-硬件时间
---------------------------------------------------------------------------------
-石英钟如何计时？
-
-BIOS 芯片如何存储、读取时间？
 
 
 参考文档
@@ -738,4 +721,3 @@ BIOS 芯片如何存储、读取时间？
 6. 《Go ARM64 vDSO 优化之路》 https://mzh.io/golang-arm64-vdso/
 7. 《vDSO - Wikipedia》 https://en.wikipedia.org/wiki/VDSO
 8. Syscalls — Linux manual page https://man7.org/linux/man-pages/man2/syscalls.2.html
-9. 《时间到底是什么？1 秒究竟有多长？李永乐老师讲石英钟和原子钟》https://www.youtube.com/watch?v=cXX_f_pWLQI
