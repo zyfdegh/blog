@@ -1,6 +1,6 @@
 +++
 title = "系统调用：从获取系统时间戳开始"
-date = "2020-05-31"
+date = "2021-03-31"
 description = "想知道 Go 中执行 time.Now() 如何获得系统时间"
 +++
 
@@ -31,7 +31,9 @@ func main() {
 那么运行时，究竟发生了什么？
 
 本文档将一步一步，从 Go 源码中 Now() 函数开始剖析，到 Go 如何调用汇编，再到系统调用过程，
-解释编程语言如何与操作系统互动。
+解释系统调用如何进行。
+
+> 文档中用的 Go 版本为 1.15.2
 
 Go 源码分析
 --------------------------------------------------------------------------------
@@ -60,8 +62,6 @@ Go 中对函数定义的说明，见 https://golang.org/ref/spec#Function_declar
 
 > A function declaration may omit the body. Such a declaration provides the signature 
 for a function implemented outside Go, such as an assembly routine.
-
-> 文档中用的 Go 版本为 1.15.2
 
 注释写了 now() 由 runtime 包提供，那到 runtime 包去找
 
